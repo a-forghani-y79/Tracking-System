@@ -1,8 +1,10 @@
-package com.moon.trackingsystem.models.OTP;
+package com.moon.trackingsystem.models.team;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OTPRepository extends JpaRepository<OTP,Integer> {
+public interface TeamRepository extends JpaRepository<Team, Integer> {
+
+
 }

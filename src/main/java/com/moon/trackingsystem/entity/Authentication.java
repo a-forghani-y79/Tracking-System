@@ -1,0 +1,26 @@
+package com.moon.trackingsystem.entity;
+
+public class Authentication {
+
+    private String phone;
+    private String password;
+
+    public Authentication() {
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}//end class

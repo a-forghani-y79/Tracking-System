@@ -32,15 +32,12 @@ public class Project {
     private Date published_at;
 
     @OneToMany
-
     @JoinColumn(name = "project_id")
     private List<Section> sections;
-
 
     @OneToMany
     @JoinColumn(name = "project_id")
     private List<Ticket> tickets;
-
 
     @OneToMany
     @JoinColumn(name = "project_id")

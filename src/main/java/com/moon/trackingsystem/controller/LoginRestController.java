@@ -1,9 +1,9 @@
 package com.moon.trackingsystem.controller;
 
-import com.moon.trackingsystem.models.person.PersonRepositoryImpl;
 import com.moon.trackingsystem.entity.Authentication;
 
 import com.moon.trackingsystem.models.person.Person;
+import com.moon.trackingsystem.models.person.PersonRepository;
 import com.moon.trackingsystem.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/login-rest")
 public class LoginRestController {
     private LoginService loginService;
-    private PersonRepositoryImpl personRepositoryImpl;
+    private PersonRepository personRepository;
 
     @Autowired
-    public LoginRestController(PersonRepositoryImpl personRepositoryImpl) {
-        this.personRepositoryImpl = personRepositoryImpl;
+    public LoginRestController(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }//end constructor
 
     @PostConstruct
     public void setup() {
-        loginService = new LoginService(personRepositoryImpl);
+        loginService = new LoginService(personRepository);
     }//end setup
 
 

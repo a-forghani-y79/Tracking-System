@@ -22,52 +22,8 @@ public class TempPassword {
     private String code;
     private Date created_at;
     private Date time;
-    @OneToOne(mappedBy = "tempPassword", cascade = CascadeType.ALL)
-    private Person person;
+  /*  @OneToOne( cascade = CascadeType.ALL)
+    private Person person;*/
 
-    public TempPassword(String code, Date created_at, Date time) {
-        this.code = code;
-        this.created_at = created_at;
-        this.time = time;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }

@@ -45,10 +45,10 @@ public class AdminService {
         return false;
     }
 
-    public boolean addMemberToCurrentTem(List<Person> people, int teamId) {
+    public boolean addMemberToCurrentTem(List<Integer> people, int teamId) {
         if (people.size() != 0 && teamRepository.existsById(teamId)) {
             Team team = teamRepository.findById(teamId).get();
-            team.getPeople().addAll(people);
+            team.getPeople().addAll(personRepository.findAllById(people));
             teamRepository.save(team);
             return true;
         }
@@ -73,9 +73,9 @@ public class AdminService {
         return null;
     }
 
-    public boolean deletePerson(Person person) {
-        if (personRepository.existsById(person.getId())) {
-            personRepository.delete(person);
+    public boolean deletePerson(int personId) {
+        if (personRepository.existsById(personId)) {
+            personRepository.deleteById(personId);
             return true;
         }
         return false;

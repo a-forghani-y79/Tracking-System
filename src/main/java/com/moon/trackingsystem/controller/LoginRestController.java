@@ -2,10 +2,9 @@ package com.moon.trackingsystem.controller;
 
 import com.moon.trackingsystem.dao.PersonRepository;
 import com.moon.trackingsystem.entity.Authentication;
-import com.moon.trackingsystem.entity.ThrowawayAuth;
 import com.moon.trackingsystem.models.Person;
+import com.moon.trackingsystem.models.Team;
 import com.moon.trackingsystem.service.LoginService;
-import com.moon.trackingsystem.service.ThrowawayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +24,7 @@ public class LoginRestController {
 
     @PostConstruct
     public void setup() {
-        loginService = new LoginService();
+        loginService = new LoginService(personRepository);
     }//end setup
 
 
@@ -34,23 +33,11 @@ public class LoginRestController {
         return loginService.phoneNumberExists(phoneNumber);
     }//end phoneNumberExists
 
-    @GetMapping("/add")
-    public String addNewPerson() {
-        Person person = new Person("Ali", "Ghoreyshi", "ali@gmail.com", "ADMIN", "09144915531"
-                , "Programmer", "alipass", null, null);
-        personRepository.add(person);
-        return "okay";
-    }//end addNewPerson
-
-    @GetMapping("/delete")
-    public String retrieve() {
-        personRepository.delete("09144915531");
-        return "deleted";
-    }//end retrieve
-
 
     @GetMapping("/authenticate")
     private boolean authentication(@RequestBody Authentication info, HttpSession session) {
+        System.out.println("phone: " + info.getPhone());
+        System.out.println("password: " + info.getPassword());
         Person person = loginService.authentication(info);
         if(person == null)
             return false;
@@ -62,14 +49,12 @@ public class LoginRestController {
         }
     }//end authentication
 
+
     @GetMapping("/send-temp-pass/{phoneNumber}")
     private boolean sendTempPassword(@PathVariable String phoneNumber) {
         int random = (int) (Math.random() * (999999 - 100000)) + 100000;
-        //TODO setup sms api & complete throwaway service
-        ThrowawayAuth throwawayAuth = new ThrowawayAuth(phoneNumber, String.valueOf(random));
-        ThrowawayService throwawayService = ThrowawayService.getInstance();
-        throwawayService.add(throwawayAuth);
         System.out.println("Code: " + random + "\nSMS sent");
+        //TODO setup sms api & complete throwaway service
         return true;
     }//end sendTempPassword
 

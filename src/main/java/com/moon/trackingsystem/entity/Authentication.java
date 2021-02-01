@@ -8,6 +8,11 @@ public class Authentication {
     public Authentication() {
     }
 
+    public Authentication(String phone, String password) {
+        this.phone = phone;
+        this.password = password;
+    }
+
     public String getPhone() {
         return phone;
     }

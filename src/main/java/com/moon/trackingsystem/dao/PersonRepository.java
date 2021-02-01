@@ -2,12 +2,15 @@ package com.moon.trackingsystem.dao;
 
 
 import com.moon.trackingsystem.models.Person;
+import com.moon.trackingsystem.models.Team;
+import com.moon.trackingsystem.models.TempPassword;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -23,9 +26,22 @@ public class PersonRepository {
     public void add(Person person) {
         Session session = entityManager.unwrap(Session.class);
         session.save(person);
-        System.out.println("New person saved!");
         System.out.println(person);
     }//end add
+
+    @Transactional
+    public boolean addTempPassword(int personID, String code) {
+        Person person = get(personID);
+        if(person == null)
+            return false;
+        else {
+//            LocalTime localTime = LocalTime.now();
+//            LocalTime expireTime = localTime.plusSeconds(120);
+//            TempPassword tempPassword = new TempPassword(code, localTime, expireTime);
+//            person.setTempPassword();
+            return true;
+        }
+    }//end addTempPassword
 
     @Transactional
     public Person update(int id) {
@@ -86,5 +102,34 @@ public class PersonRepository {
             return person;
         }
     }//end delete
+
+    @Transactional
+    public void addTeam(int id, Team team) {
+        Session session = entityManager.unwrap(Session.class);
+        Person person = get(id);
+        if(person != null) {
+            person.addTeam(team);
+            session.update(person);
+        }
+    }//end addTeam
+
+    @Transactional
+    public List<Team> getTeams(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Person person = get(id);
+        if(person == null)
+            return null;
+        else
+            return person.getTeams();
+    }//end getTeams
+
+    @Transactional
+    public void removeTeam(int id, int teamID) {
+        Person person = get(id);
+        if(person != null)
+            person.getTeams().removeIf(team -> team.getId() == teamID);
+        else
+            System.out.println("Person > null");
+    }//end removeTeam
 
 }//end PersonDAO

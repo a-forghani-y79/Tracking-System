@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,6 +34,12 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "temp_password_id")
     private TempPassword tempPassword;
+
+    public void addTeam(Team team) {
+        if(teams == null)
+            teams = new ArrayList<>();
+        teams.add(team);
+    }//end addTeam
 
     public Person(String firstName, String lastName, String email, String role, String phoneNumber, String bio, String password, List<Team> teams, TempPassword tempPassword) {
         this.firstName = firstName;

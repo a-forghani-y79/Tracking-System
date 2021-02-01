@@ -1,7 +1,5 @@
 package com.moon.trackingsystem.models;
 
-import com.moon.trackingsystem.models.Person;
-import com.moon.trackingsystem.models.Project;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +26,12 @@ public class Team {
     private List<Person> persons;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Project> projects;
+
+    public void addPerson(Person person) {
+        if(persons == null)
+            persons = new ArrayList<>();
+        persons.add(person);
+    }//end addPerson
 
     public void addProjects(Project project) {
         if(projects == null)

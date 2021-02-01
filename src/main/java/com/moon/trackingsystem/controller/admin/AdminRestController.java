@@ -34,7 +34,7 @@ public class AdminRestController {
 
     @PostMapping("/add-member-to-team")
     public boolean addMemberToTeam(@RequestBody List<Integer> people, int teamId) {
-        return new AdminService(projectRepository, teamRepository, personRepository).addMemberToCurrentTem(people, teamId);
+        return new AdminService(projectRepository, teamRepository, personRepository).addMemberToCurrentTeam(people, teamId);
 
     }
 

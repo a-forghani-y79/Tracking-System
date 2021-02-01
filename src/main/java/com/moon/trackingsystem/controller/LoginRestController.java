@@ -1,10 +1,11 @@
 package com.moon.trackingsystem.controller;
 
+import com.moon.trackingsystem.dao.PersonRepository;
 import com.moon.trackingsystem.entity.Authentication;
-import com.moon.trackingsystem.entity.ThrowawayAuth;
-import com.moon.trackingsystem.models.person.Person;
+
+import com.moon.trackingsystem.models.Person;
 import com.moon.trackingsystem.service.LoginService;
-import com.moon.trackingsystem.service.ThrowawayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;

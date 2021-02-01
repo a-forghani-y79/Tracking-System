@@ -61,6 +61,14 @@ public class UploadFile {
 @Data
 class File {
     private String filePath;
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFilePath() {
+        return this.filePath;
+    }
 }
 
 

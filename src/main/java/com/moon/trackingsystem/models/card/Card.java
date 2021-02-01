@@ -25,6 +25,7 @@ public class Card {
     private String description;
     private Date created_at;
     private Date deadLine;
+    private int attendant;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "project_id")

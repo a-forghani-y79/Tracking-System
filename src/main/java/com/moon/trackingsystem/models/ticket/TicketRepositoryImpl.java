@@ -1,6 +1,5 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.ticket;
 
-import com.moon.trackingsystem.models.Project;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,54 +7,54 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class ProjectRepository {
+public class TicketRepositoryImpl {
     private EntityManager entityManager;
 
-    public ProjectRepository(EntityManager entityManager) {
+    public TicketRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 
     @Transactional
-    public void add(Project project) {
+    public void add(Ticket ticket) {
         Session session = entityManager.unwrap(Session.class);
-        session.save(project);
-        System.out.println(project);
+        session.save(ticket);
+        System.out.println(ticket);
     }//end add
 
     @Transactional
-    public Project get(int id) {
+    public Ticket get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Project.class, id);
+        return session.get(Ticket.class, id);
     }//end get
 
     @Transactional
-    public List<Project> getAll() {
+    public List<Ticket> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Project> query = session.createQuery("from Project", Project.class);
+        Query<Ticket> query = session.createQuery("from Ticket", Ticket.class);
         return query.getResultList();
     }//end getAll
 
     @Transactional
-    public Project update(int id) {
+    public Ticket update(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Project project = session.get(Project.class, id);
-        if(project == null)
+        Ticket ticket = session.get(Ticket.class, id);
+        if(ticket == null)
             return null;
         else {
-            session.update(project);
-            return project;
+            session.update(ticket);
+            return ticket;
         }
     }//end update
 
     @Transactional
-    public Project delete(int id) {
+    public Ticket delete(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Project project = session.get(Project.class, id);
-        if(project == null)
+        Ticket ticket = session.get(Ticket.class, id);
+        if(ticket == null)
             return null;
         else {
-            session.delete(project);
-            return project;
+            session.delete(ticket);
+            return ticket;
         }
     }//end delete
 

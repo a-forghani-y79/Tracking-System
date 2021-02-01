@@ -1,9 +1,9 @@
 package com.moon.trackingsystem.controller;
 
 import com.moon.trackingsystem.models.attachment.Attachment;
-import com.moon.trackingsystem.models.attachment.AttachmentRepository;
+import com.moon.trackingsystem.models.attachment.AttachmentRepositoryImpl;
 import com.moon.trackingsystem.models.card.Card;
-import com.moon.trackingsystem.models.card.CardRepository;
+import com.moon.trackingsystem.models.card.CardRepositoryImpl;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +22,11 @@ public class UploadFile {
 
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/uploads";
     @Autowired
-    private AttachmentRepository attachmentRepository;
+    private AttachmentRepositoryImpl attachmentRepository;
     @Autowired
-    private CardRepository cardRepository;
+    private CardRepositoryImpl cardRepository;
+
+
 
     @PostMapping(value = "/upload", produces = "application/json")
     public File upload(@RequestBody MultipartFile files, int cardId) {

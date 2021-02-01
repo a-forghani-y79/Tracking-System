@@ -1,7 +1,7 @@
 package com.moon.trackingsystem.service;
 
 import com.moon.trackingsystem.entity.Authentication;
-import com.moon.trackingsystem.models.person.Person;
+import com.moon.trackingsystem.models.Person;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +16,5 @@ public class LoginService {
         // TODO make a hibernate session and authenticate entered login info
         return null;
     }//end authentication
-
 
 }//end class

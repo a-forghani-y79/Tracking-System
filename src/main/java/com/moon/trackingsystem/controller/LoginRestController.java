@@ -1,10 +1,12 @@
 package com.moon.trackingsystem.controller;
 
+import com.moon.trackingsystem.dao.PersonRepository;
 import com.moon.trackingsystem.entity.Authentication;
 import com.moon.trackingsystem.entity.ThrowawayAuth;
-import com.moon.trackingsystem.models.person.Person;
+import com.moon.trackingsystem.models.Person;
 import com.moon.trackingsystem.service.LoginService;
 import com.moon.trackingsystem.service.ThrowawayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/login-rest")
 public class LoginRestController {
     private LoginService loginService;
+    private PersonRepository personRepository;
+
+    @Autowired
+    public LoginRestController(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }//end constructor
 
     @PostConstruct
     public void setup() {
@@ -25,6 +33,20 @@ public class LoginRestController {
     private boolean phoneNumberExists(@PathVariable String phoneNumber) {
         return loginService.phoneNumberExists(phoneNumber);
     }//end phoneNumberExists
+
+    @GetMapping("/add")
+    public String addNewPerson() {
+        Person person = new Person("Ali", "Ghoreyshi", "ali@gmail.com", "ADMIN", "09144915531"
+                , "Programmer", "alipass", null, null);
+        personRepository.add(person);
+        return "okay";
+    }//end addNewPerson
+
+    @GetMapping("/delete")
+    public String retrieve() {
+        personRepository.delete("09144915531");
+        return "deleted";
+    }//end retrieve
 
 
     @GetMapping("/authenticate")

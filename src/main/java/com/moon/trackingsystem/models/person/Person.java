@@ -30,8 +30,7 @@ public class Person {
     private String bio;
     private String password;
 
-    @ManyToMany
-    private List<Team> team;
+
     @OneToOne
     private TempPassword tempPassword;
 

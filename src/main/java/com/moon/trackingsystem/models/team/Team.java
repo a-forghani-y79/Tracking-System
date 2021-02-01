@@ -24,6 +24,9 @@ public class Team {
     private int id;
     private String name;
 
+    @ManyToMany
+    private List<Person> people;
+
     @OneToMany()
     @JoinColumn(name = "team_id")
     private List<Project> projects;

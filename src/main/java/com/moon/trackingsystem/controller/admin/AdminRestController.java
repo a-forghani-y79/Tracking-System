@@ -33,7 +33,7 @@ public class AdminRestController {
     }
 
     @PostMapping("/add-member-to-team")
-    public boolean addMemberToTeam(@RequestBody List<Person> people, int teamId) {
+    public boolean addMemberToTeam(@RequestBody List<Integer> people, int teamId) {
         return new AdminService(projectRepository, teamRepository, personRepository).addMemberToCurrentTem(people, teamId);
 
     }
@@ -63,8 +63,8 @@ public class AdminRestController {
         return new AdminService(projectRepository, teamRepository, personRepository).getAllProjectsForTeam(teamId);
     }
 
-    @DeleteMapping("/gelete-person")
-    public boolean deletePerson(@RequestBody Person person) {
+    @DeleteMapping("/delete-person")
+    public boolean deletePerson(@RequestBody int person) {
         return new AdminService(projectRepository, teamRepository, personRepository).deletePerson(person);
 
     }

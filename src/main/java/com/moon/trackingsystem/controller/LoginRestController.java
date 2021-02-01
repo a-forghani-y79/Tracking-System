@@ -55,6 +55,7 @@ public class LoginRestController {
         int random = (int) (Math.random() * (999999 - 100000)) + 100000;
         System.out.println("Code: " + random + "\nSMS sent");
         //TODO setup sms api & complete throwaway service
+        //fixme
         return true;
     }//end sendTempPassword
 

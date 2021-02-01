@@ -26,7 +26,6 @@ public class Attachment {
     @JoinColumn(name = "card_id")
     private Card attachmentCard;
 
-
     public Attachment(String name, String url) {
         this.name = name;
         this.url = url;
@@ -63,4 +62,5 @@ public class Attachment {
     public void setAttachmentCard(Card attachmentCard) {
         this.attachmentCard = attachmentCard;
     }
+
 }

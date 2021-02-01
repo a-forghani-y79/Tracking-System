@@ -17,7 +17,7 @@ public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String namel;
+    private String name;
     private String url;
 
 

@@ -2,14 +2,14 @@ package com.moon.trackingsystem.models.card;
 
 import com.moon.trackingsystem.models.attachment.Attachment;
 import com.moon.trackingsystem.models.comment.Comment;
-import com.moon.trackingsystem.models.person.Person;
 import com.moon.trackingsystem.models.task.Task;
-import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,8 +28,8 @@ public class Card {
     private Date deadLine;
 
 
-    @OneToOne
-    private Person manager;
+//    @OneToOne
+//    private Person manager;
     @OneToMany
     @JoinColumn(name = "card_id")
     private List<Comment> comments;

@@ -21,13 +21,14 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+
     private int id;
     private String subject;
     private String description;
     private String author;
     private Date created_at;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "ticket_id")
     private List<Answer> answers ;
 

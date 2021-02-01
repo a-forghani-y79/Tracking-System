@@ -3,9 +3,10 @@ package com.moon.trackingsystem.models.card;
 import com.moon.trackingsystem.models.attachment.Attachment;
 import com.moon.trackingsystem.models.comment.Comment;
 import com.moon.trackingsystem.models.person.Person;
-import com.moon.trackingsystem.models.project.Project;
 import com.moon.trackingsystem.models.task.Task;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -29,15 +30,15 @@ public class Card {
 
     @OneToOne
     private Person manager;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "card_id")
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "card_id")
     private List<Attachment> attachments;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "card_id")
     private List<Task> tasks;
 

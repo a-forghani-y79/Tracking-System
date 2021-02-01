@@ -19,6 +19,7 @@ public class TempPassword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+
     private int id;
     private String code;
     private Date created_at;

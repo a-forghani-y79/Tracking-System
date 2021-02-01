@@ -1,6 +1,5 @@
 package com.moon.trackingsystem.models.comment;
 
-import com.moon.trackingsystem.models.card.Card;
 import lombok.*;
 
 import javax.persistence.*;

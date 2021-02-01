@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -29,16 +31,18 @@ public class Project {
     private Date crated_at;
     private Date published_at;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
+
     @JoinColumn(name = "project_id")
     private List<Section> sections;
 
-    @OneToMany(fetch = FetchType.EAGER)
+
+    @OneToMany
     @JoinColumn(name = "project_id")
     private List<Ticket> tickets;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "project_id")
     private List<Card> cards;
 }

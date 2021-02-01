@@ -1,6 +1,5 @@
 package com.moon.trackingsystem.models.attachment;
 
-import com.moon.trackingsystem.models.card.Card;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "attachment")
-
-
 public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

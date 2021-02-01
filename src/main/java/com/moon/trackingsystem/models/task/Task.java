@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Table(name = "task")
 public class Task {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

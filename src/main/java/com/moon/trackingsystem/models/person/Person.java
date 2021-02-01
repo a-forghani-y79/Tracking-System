@@ -1,15 +1,15 @@
 package com.moon.trackingsystem.models.person;
 
+
 import com.moon.trackingsystem.models.team.Team;
 import com.moon.trackingsystem.models.tempPassword.TempPassword;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
-
 
 @Entity
 @Data
@@ -30,7 +30,7 @@ public class Person {
     private String bio;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Team> team;
     @OneToOne
     private TempPassword tempPassword;

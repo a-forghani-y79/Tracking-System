@@ -17,6 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "section")
 public class Section {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

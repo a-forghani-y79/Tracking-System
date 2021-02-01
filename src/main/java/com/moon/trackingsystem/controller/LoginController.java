@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @GetMapping("")
-    private String showLoginIndex() {
+    private String showLoginIndex(HttpSession session) {
+        session.setAttribute("role", "ADMIN");
         return "loginIndex";
     }//end showLoginIndex
 

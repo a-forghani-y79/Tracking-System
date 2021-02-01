@@ -35,17 +35,15 @@ public class LoginRestController {
 
 
     @GetMapping("/authenticate")
-    private boolean authentication(@RequestBody Authentication info, HttpSession session) {
+    private Person authentication(@RequestBody Authentication info) {
         System.out.println("phone: " + info.getPhone());
         System.out.println("password: " + info.getPassword());
         Person person = loginService.authentication(info);
         if(person == null)
-            return false;
+            return null;
         else {
-            session.setAttribute("id", person.getId());
-            session.setAttribute("password", person.getPassword());
-            session.setAttribute("role", person.getRole());
-            return true;
+            System.out.println("Json : " + person);
+            return person;
         }
     }//end authentication
 

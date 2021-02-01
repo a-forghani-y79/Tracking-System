@@ -1,6 +1,5 @@
 package com.moon.trackingsystem.models.answer;
 
-import com.moon.trackingsystem.models.ticket.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

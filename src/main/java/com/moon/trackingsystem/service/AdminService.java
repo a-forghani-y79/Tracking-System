@@ -45,7 +45,7 @@ public class AdminService {
         return false;
     }
 
-    public boolean addMemberToCurrentTem(List<Integer> people, int teamId) {
+    public boolean addMemberToCurrentTeam(List<Integer> people, int teamId) {
         if (people.size() != 0 && teamRepository.existsById(teamId)) {
             Team team = teamRepository.findById(teamId).get();
             team.getPeople().addAll(personRepository.findAllById(people));

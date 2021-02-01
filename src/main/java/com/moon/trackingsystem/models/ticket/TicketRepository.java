@@ -1,4 +1,10 @@
 package com.moon.trackingsystem.models.ticket;
 
-public interface TicketRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+
+
 }

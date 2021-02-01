@@ -1,15 +1,15 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.tempPassword;
 
-import com.moon.trackingsystem.models.TempPassword;
+import com.moon.trackingsystem.models.tempPassword.TempPassword;
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-public class TempPasswordRepository {
+public class TempPasswordRepositoryImpl {
     private EntityManager entityManager;
 
-    public TempPasswordRepository(EntityManager entityManager) {
+    public TempPasswordRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 

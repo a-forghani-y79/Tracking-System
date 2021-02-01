@@ -1,6 +1,6 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.answer;
 
-import com.moon.trackingsystem.models.Task;
+import com.moon.trackingsystem.models.answer.Answer;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,56 +8,57 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class TaskRepository {
+public class AnswerRepositoryImpl {
     private EntityManager entityManager;
 
-    public TaskRepository(EntityManager entityManager) {
+    public AnswerRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 
     @Transactional
-    public void add(Task task) {
+    public void add(Answer answer) {
         Session session = entityManager.unwrap(Session.class);
-        session.save(task);
-        System.out.println(task);
+        session.save(answer);
+        System.out.println(answer);
     }//end add
 
     @Transactional
-    public Task get(int id) {
+    public Answer get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Task.class, id);
+        return session.get(Answer.class, id);
     }//end get
 
     @Transactional
-    public List<Task> getAll() {
+    public List<Answer> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Task> query = session.createQuery("from Task", Task.class);
+        Query<Answer> query = session.createQuery("from Answer", Answer.class);
         return query.getResultList();
     }//end getAll
 
     @Transactional
-    public Task update(int id) {
+    public Answer update(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Task task = session.get(Task.class, id);
-        if(task == null)
+        Answer answer = session.get(Answer.class, id);
+        if(answer == null)
             return null;
         else {
-            session.update(task);
-            return task;
+            session.update(answer);
+            return answer;
         }
     }//end update
 
     @Transactional
-    public Task delete(int id) {
+    public Answer delete(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Task task = session.get(Task.class, id);
-        if(task == null)
+        Answer answer = session.get(Answer.class, id);
+        if(answer == null)
             return null;
         else {
-            session.delete(task);
-            return task;
+            session.delete(answer);
+            return answer;
         }
     }//end delete
+
 
 
 }

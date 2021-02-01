@@ -1,6 +1,6 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.section;
 
-import com.moon.trackingsystem.models.Attachment;
+import com.moon.trackingsystem.models.section.Section;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,54 +8,54 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class AttachmentRepository {
+public class SectionRepositoryImpl {
     private EntityManager entityManager;
 
-    public AttachmentRepository(EntityManager entityManager) {
+    public SectionRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 
     @Transactional
-    public void add(Attachment attachment) {
+    public void add(Section section) {
         Session session = entityManager.unwrap(Session.class);
-        session.save(attachment);
-        System.out.println(attachment);
+        session.save(section);
+        System.out.println(section);
     }//end add
 
     @Transactional
-    public Attachment get(int id) {
+    public Section get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Attachment.class, id);
+        return session.get(Section.class, id);
     }//end get
 
     @Transactional
-    public List<Attachment> getAll() {
+    public List<Section> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Attachment> query = session.createQuery("from Attachment", Attachment.class);
+        Query<Section> query = session.createQuery("from Section", Section.class);
         return query.getResultList();
     }//end getAll
 
     @Transactional
-    public Attachment update(int id) {
+    public Section update(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Attachment attachment = session.get(Attachment.class, id);
-        if(attachment == null)
+        Section section = session.get(Section.class, id);
+        if(section == null)
             return null;
         else {
-            session.update(attachment);
-            return attachment;
+            session.update(section);
+            return section;
         }
     }//end update
 
     @Transactional
-    public Attachment delete(int id) {
+    public Section delete(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Attachment attachment = session.get(Attachment.class, id);
-        if(attachment == null)
+        Section section = session.get(Section.class, id);
+        if(section == null)
             return null;
         else {
-            session.delete(attachment);
-            return attachment;
+            session.delete(section);
+            return section;
         }
     }//end delete
 

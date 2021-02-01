@@ -1,6 +1,6 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.card;
 
-import com.moon.trackingsystem.models.Answer;
+import com.moon.trackingsystem.models.card.Card;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,57 +8,56 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class AnswerRepository {
+public class CardRepositoryImpl {
     private EntityManager entityManager;
 
-    public AnswerRepository(EntityManager entityManager) {
+    public CardRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 
     @Transactional
-    public void add(Answer answer) {
+    public void add(Card card) {
         Session session = entityManager.unwrap(Session.class);
-        session.save(answer);
-        System.out.println(answer);
+        session.save(card);
+        System.out.println(card);
     }//end add
 
     @Transactional
-    public Answer get(int id) {
+    public Card get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Answer.class, id);
+        return session.get(Card.class, id);
     }//end get
 
     @Transactional
-    public List<Answer> getAll() {
+    public List<Card> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Answer> query = session.createQuery("from Answer", Answer.class);
+        Query<Card> query = session.createQuery("from Card", Card.class);
         return query.getResultList();
     }//end getAll
 
     @Transactional
-    public Answer update(int id) {
+    public Card update(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Answer answer = session.get(Answer.class, id);
-        if(answer == null)
+        Card card = session.get(Card.class, id);
+        if(card == null)
             return null;
         else {
-            session.update(answer);
-            return answer;
+            session.update(card);
+            return card;
         }
     }//end update
 
     @Transactional
-    public Answer delete(int id) {
+    public Card delete(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Answer answer = session.get(Answer.class, id);
-        if(answer == null)
+        Card card = session.get(Card.class, id);
+        if(card == null)
             return null;
         else {
-            session.delete(answer);
-            return answer;
+            session.delete(card);
+            return card;
         }
     }//end delete
-
 
 
 }

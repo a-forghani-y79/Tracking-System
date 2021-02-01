@@ -1,6 +1,6 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.task;
 
-import com.moon.trackingsystem.models.Team;
+import com.moon.trackingsystem.models.task.Task;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,57 +8,56 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class TeamRepository {
+public class TaskRepositoryImpl {
     private EntityManager entityManager;
 
-    public TeamRepository(EntityManager entityManager) {
+    public TaskRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 
     @Transactional
-    public void add(Team team) {
+    public void add(Task task) {
         Session session = entityManager.unwrap(Session.class);
-        session.save(team);
-        System.out.println(team);
+        session.save(task);
+        System.out.println(task);
     }//end add
 
     @Transactional
-    public Team get(int id) {
+    public Task get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Team.class, id);
+        return session.get(Task.class, id);
     }//end get
 
     @Transactional
-    public List<Team> getAll() {
+    public List<Task> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Team> query = session.createQuery("from Team", Team.class);
+        Query<Task> query = session.createQuery("from Task", Task.class);
         return query.getResultList();
     }//end getAll
 
     @Transactional
-    public Team update(int id) {
+    public Task update(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Team team = session.get(Team.class, id);
-        if(team == null)
+        Task task = session.get(Task.class, id);
+        if(task == null)
             return null;
         else {
-            session.update(team);
-            return team;
+            session.update(task);
+            return task;
         }
     }//end update
 
     @Transactional
-    public Team delete(int id) {
+    public Task delete(int id) {
         Session session = entityManager.unwrap(Session.class);
-        Team team = session.get(Team.class, id);
-        if(team == null)
+        Task task = session.get(Task.class, id);
+        if(task == null)
             return null;
         else {
-            session.delete(team);
-            return team;
+            session.delete(task);
+            return task;
         }
     }//end delete
-
 
 
 }

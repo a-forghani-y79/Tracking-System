@@ -1,6 +1,6 @@
-package com.moon.trackingsystem.dao;
+package com.moon.trackingsystem.models.comment;
 
-import com.moon.trackingsystem.models.Comment;
+import com.moon.trackingsystem.models.comment.Comment;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CommentRepository {
+public class CommentRepositoryImpl {
     private EntityManager entityManager;
 
-    public CommentRepository(EntityManager entityManager) {
+    public CommentRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }//end constructor
 

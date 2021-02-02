@@ -6,6 +6,7 @@ import com.moon.trackingsystem.models.person.Person;
 import com.moon.trackingsystem.models.person.PersonRepository;
 import com.moon.trackingsystem.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -33,16 +34,27 @@ public class LoginRestController {
     }//end phoneNumberExists
 
 
+//    @PostMapping("/authenticate")
+//    private Person authentication(@RequestBody Authentication info) {
+//        System.out.println("phone: " + info.getPhone());
+//        System.out.println("password: " + info.getPassword());
+//        Person person = loginService.authentication(info);
+//        if(person == null)
+//            return null;
+//        else {
+//            System.out.println("Json : " + person);
+//            return person;
+//        }
+//    }//end authentication
     @PostMapping("/authenticate")
-    private Person authentication(@RequestBody Authentication info) {
+    private ResponseEntity<Person> authentication(@RequestBody Authentication info) {
         System.out.println("phone: " + info.getPhone());
         System.out.println("password: " + info.getPassword());
         Person person = loginService.authentication(info);
         if(person == null)
-            return null;
+            return ResponseEntity.notFound().build();
         else {
-            System.out.println("Json : " + person);
-            return person;
+            return ResponseEntity.ok(person);
         }
     }//end authentication
 

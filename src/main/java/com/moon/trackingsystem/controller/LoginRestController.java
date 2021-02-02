@@ -17,13 +17,15 @@ import java.util.Date;
 @RestController
 @RequestMapping(value = "/login-rest")
 public class LoginRestController {
+    @Autowired
     private LoginService loginService;
+    @Autowired
     private PersonRepository personRepository;
 
-    @Autowired
-    public LoginRestController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }//end constructor
+//    @Autowired
+//    public LoginRestController(PersonRepository personRepository) {
+//        this.personRepository = personRepository;
+//    }//end constructor
 
     @PostConstruct
     public void setup() {

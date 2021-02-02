@@ -11,80 +11,86 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins= "http://lohalhost:3000")
+@CrossOrigin(origins = "http://lohalhost:3000")
 @RestController
 @RequestMapping("/team-rest")
 public class AdminRestController {
     @Autowired
-    private TeamRepository teamRepository;
-    @Autowired
-    private ProjectRepository projectRepository;
+    private AdminService adminService;
     @Autowired
     private PersonRepository personRepository;
 
     @PostMapping("/create-team")
     public boolean createTeam(@RequestBody Team team) {
-        return new AdminService(projectRepository, teamRepository, personRepository).crateTeam(team);
+        return adminService.crateTeam(team);
     }
 
     @PostMapping("/add-project")
     public boolean addProject(@RequestBody Project project, int teamId) {
-        return new AdminService(projectRepository, teamRepository, personRepository).addProject(project, teamId);
+        return adminService.addProject(project, teamId);
     }
 
     @PostMapping("/add-member-to-team")
     public boolean addMemberToTeam(@RequestBody List<Integer> people, int teamId) {
-        return new AdminService(projectRepository, teamRepository, personRepository).addMemberToCurrentTeam(people, teamId);
+        return adminService.addMemberToCurrentTeam(people, teamId);
 
     }
 
     @GetMapping("/all-people")
     public List<Person> getPeople() {
-        return new AdminService(projectRepository, teamRepository, personRepository).getPeople();
+        return adminService.getPeople();
     }
 
     @GetMapping("/all-teams")
     public List<Team> getAllTeam() {
-        return new AdminService(projectRepository, teamRepository, personRepository).getTeams();
+        return adminService.getTeams();
     }
 
     @GetMapping("/all-projects")
     public List<Project> getAllProjects() {
-        return new AdminService(projectRepository, teamRepository, personRepository).getProjects();
+        return adminService.getProjects();
     }
 
     @GetMapping("/all-people-for-team")
     public List<Person> getPeopleForTeam(@RequestBody int teamId) {
-        return new AdminService(projectRepository, teamRepository, personRepository).getPeopleForTeam(teamId);
+        return adminService.getPeopleForTeam(teamId);
     }
 
     @GetMapping("/all-projects-for-team")
     public List<Project> getAllProjectsForTeam(@RequestBody int teamId) {
-        return new AdminService(projectRepository, teamRepository, personRepository).getAllProjectsForTeam(teamId);
+        return adminService.getAllProjectsForTeam(teamId);
     }
 
     @DeleteMapping("/delete-person")
     public boolean deletePerson(@RequestBody int person) {
-        return new AdminService(projectRepository, teamRepository, personRepository).deletePerson(person);
+        return adminService.deletePerson(person);
 
     }
+
     @PostMapping(value = "/add-person")
-    public void addPerson(@RequestBody Person person){
+    public void addPerson(@RequestBody Person person) {
         personRepository.save(person);
+    }
+
+    @PostMapping(value = "/invite-person")
+    public void addPerson(@RequestBody String email) throws IOException, MessagingException {
+        adminService.invitePerson(email);
     }
 
 }
 
 @Data
-class AddProject{
+class AddProject {
     private Project project;
     private int teamId;
 }
 
 @Data
-class AddMemberToTeam{
+class AddMemberToTeam {
     private List<Integer> peopleId;
     private int teamId;
 }

@@ -17,14 +17,18 @@ public class OTPService {
     private PersonRepository personRepository;
     @Autowired
     private TempPasswordRepository tempPasswordRepository;
-
+@Autowired
+ private SMSService smsService;
     public Person sendTempPassword(String phone) {
         int random = (int) (Math.random() * (999999 - 100000)) + 100000;
         System.out.println("Code: " + random + "\nSMS sent");
-        //TODO setup sms api & complete throwaway service
+
         Person person = personRepository.findByPhoneNumber(phone);
         TempPassword tempPassword = new TempPassword().builder().code(random + "").created_at(new Date()).build();
         if (person != null) {
+            smsService.setMessage("رمز یکبار مصرف شما "+random);
+            smsService.setPhoneNumber(phone);
+            smsService.send();
             tempPasswordRepository.save(tempPassword);
             person.setTempPassword(tempPassword);
             personRepository.save(person);

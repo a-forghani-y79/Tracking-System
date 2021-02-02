@@ -39,7 +39,7 @@ public class SendEmail {
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
-        MimeBodyPart attachPart = new MimeBodyPart();
+//        MimeBodyPart attachPart = new MimeBodyPart();
 
         //attachPart.attachFile("/var/tmp/image19.png");
         //multipart.addBodyPart(attachPart);

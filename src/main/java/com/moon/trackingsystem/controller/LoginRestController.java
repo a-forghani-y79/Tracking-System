@@ -4,18 +4,23 @@ import com.moon.trackingsystem.entity.Authentication;
 
 import com.moon.trackingsystem.models.person.Person;
 import com.moon.trackingsystem.models.person.PersonRepository;
+import com.moon.trackingsystem.models.tempPassword.TempPassword;
+import com.moon.trackingsystem.models.tempPassword.TempPasswordRepository;
 import com.moon.trackingsystem.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/login-rest")
 public class LoginRestController {
     private LoginService loginService;
     private PersonRepository personRepository;
+    @Autowired
+    private TempPasswordRepository tempPasswordRepository;
 
     @Autowired
     public LoginRestController(PersonRepository personRepository) {
@@ -65,7 +70,17 @@ public class LoginRestController {
         System.out.println("Code: " + random + "\nSMS sent");
         //TODO setup sms api & complete throwaway service
         //fixme
-        return true;
+        Person person = personRepository.findByPhoneNumber(phoneNumber);
+        TempPassword tempPassword = new TempPassword().builder().code(random+"").created_at(new Date()).build();
+        if (person != null){
+            tempPasswordRepository.save(tempPassword);
+            person.setTempPassword(tempPassword);
+            personRepository.save(person);
+
+            return true;
+        }
+
+        return false;
     }//end sendTempPassword
 
 

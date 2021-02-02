@@ -6,7 +6,6 @@ import com.moon.trackingsystem.models.person.PersonRepository;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class LoginService {
     private PersonRepository personRepository;
@@ -16,16 +15,21 @@ public class LoginService {
     }
 
     public boolean phoneNumberExists(String phoneNumber) {
-        for(Person person : personRepository.findAll())
-            if(person.getPhoneNumber().equals(phoneNumber))
+        for (Person person : personRepository.findAll())
+            if (person.getPhoneNumber().equals(phoneNumber))
                 return true;
         return false;
     }//end phoneNumberExists
 
     public Person authentication(Authentication info) {
-        for(Person person : personRepository.findAll())
-            if(person.getPhoneNumber().equals(info.getPhone()) && person.getPassword().equals(info.getPassword()))
-                return person;
+//        for(Person person : personRepository.findAll())
+//            if(person.getPhoneNumber().equals(info.getPhone()) && person.getPassword().equals(info.getPassword()))
+//                return person;
+        Person person = personRepository.findByPhoneNumber(info.getPhone());
+        if (person != null && person.getPassword().equals(info.getPassword())) {
+            return person;
+        }
+
         return null;
     }//end authentication
 

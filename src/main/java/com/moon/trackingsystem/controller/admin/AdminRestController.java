@@ -7,6 +7,7 @@ import com.moon.trackingsystem.models.project.ProjectRepository;
 import com.moon.trackingsystem.models.team.Team;
 import com.moon.trackingsystem.models.team.TeamRepository;
 import com.moon.trackingsystem.service.AdminService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,5 +75,16 @@ public class AdminRestController {
         personRepository.save(person);
     }
 
+}
 
+@Data
+class AddProject{
+    private Project project;
+    private int teamId;
+}
+
+@Data
+class AddMemberToTeam{
+    private List<Integer> peopleId;
+    private int teamId;
 }

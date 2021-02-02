@@ -21,7 +21,7 @@ public class TempPassword {
     private int id;
     private String code;
     private Date created_at;
-    private Date time;
+//    private Date time;
   /*  @OneToOne( cascade = CascadeType.ALL)
     private Person person;*/
 

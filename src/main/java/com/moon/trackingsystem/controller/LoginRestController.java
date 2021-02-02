@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/login-rest")
@@ -34,7 +33,7 @@ public class LoginRestController {
     }//end phoneNumberExists
 
 
-    @GetMapping("/authenticate")
+    @PostMapping("/authenticate")
     private Person authentication(@RequestBody Authentication info) {
         System.out.println("phone: " + info.getPhone());
         System.out.println("password: " + info.getPassword());

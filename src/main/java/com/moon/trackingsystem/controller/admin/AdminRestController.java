@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins= "http://lohalhost:3000")
 @RestController
 @RequestMapping("/team-rest")
 public class AdminRestController {
@@ -67,6 +68,10 @@ public class AdminRestController {
     public boolean deletePerson(@RequestBody int person) {
         return new AdminService(projectRepository, teamRepository, personRepository).deletePerson(person);
 
+    }
+    @PostMapping(value = "/add-person")
+    public void addPerson(@RequestBody Person person){
+        personRepository.save(person);
     }
 
 

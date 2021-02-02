@@ -16,8 +16,8 @@ public class SMSService {
     String message = "";
 
 
-    public SMSService(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setMessage(String message) {

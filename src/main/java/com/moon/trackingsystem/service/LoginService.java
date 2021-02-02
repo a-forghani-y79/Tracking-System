@@ -3,6 +3,7 @@ package com.moon.trackingsystem.service;
 import com.moon.trackingsystem.entity.Authentication;
 import com.moon.trackingsystem.models.person.Person;
 import com.moon.trackingsystem.models.person.PersonRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -21,22 +22,24 @@ public class LoginService {
         return false;
     }//end phoneNumberExists
 
-    public Person authentication(Authentication info) {
+    public ResponseEntity<Person> authentication(Authentication info) {
 //        for(Person person : personRepository.findAll())
 //            if(person.getPhoneNumber().equals(info.getPhone()) && person.getPassword().equals(info.getPassword()))
 //                return person;
         Person person = personRepository.findByPhoneNumber(info.getPhone());
         if (person != null && person.getPassword().equals(info.getPassword())) {
-            return person;
+            return ResponseEntity.ok(person);
+
         }
 
-        return null;
+        return ResponseEntity.notFound().build();
+
     }//end authentication
 
-    public boolean addTempPassword(int personID, String code) {
-
-        return true;
-    }//end sendTempPassword
+//    public boolean addTempPassword(int personID, String code) {
+//
+//        return true;
+//    }//end sendTempPassword
 
 
 }//end class

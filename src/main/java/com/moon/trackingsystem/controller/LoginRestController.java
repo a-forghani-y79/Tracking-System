@@ -19,8 +19,6 @@ import java.util.Date;
 public class LoginRestController {
     private LoginService loginService;
     private PersonRepository personRepository;
-    @Autowired
-    private TempPasswordRepository tempPasswordRepository;
 
     @Autowired
     public LoginRestController(PersonRepository personRepository) {
@@ -55,33 +53,11 @@ public class LoginRestController {
     private ResponseEntity<Person> authentication(@RequestBody Authentication info) {
         System.out.println("phone: " + info.getPhone());
         System.out.println("password: " + info.getPassword());
-        Person person = loginService.authentication(info);
-        if(person == null)
-            return ResponseEntity.notFound().build();
-        else {
-            return ResponseEntity.ok(person);
-        }
+        return loginService.authentication(info);
+
     }//end authentication
 
 
-    @GetMapping("/send-temp-pass/{phoneNumber}")
-    private boolean sendTempPassword(@PathVariable String phoneNumber) {
-        int random = (int) (Math.random() * (999999 - 100000)) + 100000;
-        System.out.println("Code: " + random + "\nSMS sent");
-        //TODO setup sms api & complete throwaway service
-        //fixme
-        Person person = personRepository.findByPhoneNumber(phoneNumber);
-        TempPassword tempPassword = new TempPassword().builder().code(random+"").created_at(new Date()).build();
-        if (person != null){
-            tempPasswordRepository.save(tempPassword);
-            person.setTempPassword(tempPassword);
-            personRepository.save(person);
-
-            return true;
-        }
-
-        return false;
-    }//end sendTempPassword
 
 
 }//end class
